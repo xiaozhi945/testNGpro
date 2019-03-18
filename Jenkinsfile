@@ -1,18 +1,22 @@
 #!/usr/bin/env groovy
 pipeline{
-        //def mvnHome = tool 'maven3.6.0'
-        //env.PATH = "${mvnHome}/bin:${env.PATH}"
+        agent any
 
         stages {
-            stage('mvn test') {
-                //sh "mvn test"
-                echo '111111111111111111111111'
+            stage('Build') {
+                steps {
+                    echo 'Building..'
                 }
-
-            stage('mvn build') {
-                //sh "mvn clean install "
-                echo '22222222222222222222222'
-                }
-
             }
+            stage('Test') {
+                steps {
+                    echo 'Testing..'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    sh "mvn clean install -Dmaven.test.skip=true"
+                }
+            }
+        }
         }
