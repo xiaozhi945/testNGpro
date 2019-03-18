@@ -10,8 +10,8 @@ node {
 
         stage('mvn build'){
         //sh "JAVA_HOME=${javaHome} mvn clean package"
-        configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
-        sh 'mvn -s $MAVEN_SETTINGS clean package'
+        //configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
+        sh 'mvn -s  clean package'
         }
         }
 
@@ -21,7 +21,7 @@ node {
 
         stage('mvn deploy'){
         configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
-        sh 'mvn -s $MAVEN_SETTINGS deploy'
+        sh 'mvn -s deploy'
         }
         }
         }
