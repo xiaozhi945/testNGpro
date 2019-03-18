@@ -1,23 +1,12 @@
-Jenkinsfile (Declarative Pipeline)
+Jenkinsfile (Scripted pipeline)
 
-pipeline {
-    agent {
-        // Define agent details here
-    }
-    environment {
-        //AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        //AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
-    }
-    stages {
-        stage('Example stage 1') {
-            steps {
-                // 1
-            }
-        }
-        stage('Example stage 2') {
-            steps {
-                // 2
-            }
+node {
+    stage('Example'){
+        if(env.BRANCH_NAME=='master'){
+            echo 'execute master'
+        }else{
+            echo 'execute elsewhere'
         }
     }
+}
 
