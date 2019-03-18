@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 pipeline{
-        def mvnHome = tool 'maven3.6.0'
-        env.PATH = "${mvnHome}/bin:${env.PATH}"
+        //def mvnHome = tool 'maven3.6.0'
+        //env.PATH = "${mvnHome}/bin:${env.PATH}"
 
         stages {
             stage('mvn test') {
