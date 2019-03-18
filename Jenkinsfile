@@ -15,7 +15,10 @@ pipeline{
             }
             stage('Deploy') {
                 steps {
-                    sh "mvn clean install"
+                checkout scm
+                sh 'mvn -version'
+
+                sh "mvn clean install"
                 }
             }
         }
