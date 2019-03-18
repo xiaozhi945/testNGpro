@@ -1,13 +1,22 @@
-Jenkinsfile (Scripted pipeline)
+#!/usr/bin/env groovy
+pipeline{
+        agent any
 
-node {
-
-    stage('Example'){
-        if(env.BRANCH_NAME=='master'){
-            echo 'execute master'
-        }else{
-            echo 'execute elsewhere'
+        stages {
+            stage('Build') {
+                steps {
+                    echo 'Building..'
+                }
+            }
+            stage('Test') {
+                steps {
+                    echo 'Testing..'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying....'
+                }
+            }
         }
-    }
-}
-
+        }
