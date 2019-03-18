@@ -1,25 +1,27 @@
-#!/usr/bin/env groovy
-pipeline{
-        agent any
+node {
+        stage('checkout'){
+        //必须有，该checkout步骤将检出从源控制代码; scm是一个特殊变量，指示checkout步骤克隆触发此Pipeline运行的特定修订。
+        checkout scm
+        }
 
-        stages {
-            stage('Build') {
-                steps {
-                    echo 'Building..'
-                }
-            }
-            stage('Test') {
-                steps {
-                    echo 'Testing..'
-                }
-            }
-            stage('Deploy') {
-                steps {
-                checkout scm
-                sh 'mvn -version'
+        def javaHome = tool('jdk1.8')
+        def mvnHome = tool('mvn3')
+        env.PATH = "${mvnHome}/bin:${env.PATH}"
 
-                sh "mvn clean install"
-                }
-            }
+        stage('mvn build'){
+        //sh "JAVA_HOME=${javaHome} mvn clean package"
+        configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
+        sh 'mvn -s $MAVEN_SETTINGS clean package'
+        }
+        }
+
+        stage('mvn test'){
+        sh "echo test"
+        }
+
+        stage('mvn deploy'){
+        configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
+        sh 'mvn -s $MAVEN_SETTINGS deploy'
+        }
         }
         }
