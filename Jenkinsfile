@@ -4,8 +4,8 @@ node {
         checkout scm
         }
 
-        def javaHome = tool('jdk1.8')
-        def mvnHome = tool('mvn3')
+        def javaHome = tool('jdk1.8.0_92')
+        def mvnHome = tool('mvn3.6.0')
         env.PATH = "${mvnHome}/bin:${env.PATH}"
 
         stage('mvn build'){
