@@ -27,6 +27,7 @@ public class TestDemo {
     public void testcase3(){
         File file = new File("c:/a");
         file.renameTo(new File("c:/b"));
+        System.out.println("test massage");
 
 
     }
